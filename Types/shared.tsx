@@ -6,3 +6,12 @@ export type RegisterData ={
     dateOfBirth:string,
     gender:string,
 }
+export type ChangePasswordData ={
+    password:string,
+    newPassword:string,
+}
+
+export type LoginData ={
+    email:string,
+    password:string,
+}

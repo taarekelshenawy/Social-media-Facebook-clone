@@ -8,11 +8,12 @@ import Image from "next/image";
 import useRegister from "@/hooks/useRegister";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 
 const schema = z
   .object({
-    name: z.string().min(1, { message: "Name is required" }),
+    name: z.string().min(1, { message: "Name is required" }).min(3 ,{ message: "at least 3 digits" }),
     email: z.string().email({ message: "Invalid email address" }),
     password: z
       .string()
@@ -40,8 +41,10 @@ type FormInputs = z.infer<typeof schema>;
 
 
 export default function MyForm() {
-  const router = useRouter()
-  const {mutate} = useRegister();
+  const [showPassword, setShowPassword] = useState(true);
+  const [showRePassword, setShowRePassword] = useState(true);
+  const router = useRouter();
+  const {mutate , isPending} = useRegister();
   const {
     register,
     handleSubmit,
@@ -50,18 +53,16 @@ export default function MyForm() {
   } = useForm<FormInputs>({
     resolver: zodResolver(schema),
     mode: "onChange", 
+    shouldUnregister: false,
   });
 
-  const [isLoading,setisLoading]=useState(false);
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    setisLoading(true)
      mutate(data,{
       onSuccess:()=>{
         router.push('/')
       }
      });
-    setisLoading(false)
      reset()
   };
 
@@ -89,16 +90,56 @@ export default function MyForm() {
         <input type="email" {...register("email")} placeholder="Email" className="font-bold text-lg  w-full h-11 px-2 border-2 border-gray-500" />
         {errors.email && <p className="text-red-500">{errors.email.message}</p>}
       </div>
-        <div className="mb-5">
-        <input {...register("password")} placeholder="password" className="font-bold text-lg  w-full h-11 px-2 border-2 border-gray-500" />
-        {errors.password && <p className="text-red-500">{errors.password?.message}</p>}
-      </div>
 
       <div className="mb-5">
-        <input  {...register("rePassword")} placeholder="rePassword" className="font-bold text-lg  w-full h-11 px-2 border-2 border-gray-500" />
-        {errors.rePassword && <p className="text-red-500">{errors.rePassword?.message}</p>}
+        <div className="relative">
+          <input
+            type={showPassword ? "password" :"text"}
+            {...register("password")}
+            placeholder="Password"
+            className="font-bold text-lg w-full h-11 px-2 pr-10 border-2 border-gray-500"
+          />
+
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600"
+          >
+            {showPassword ? <AiFillEyeInvisible size={22} /> : <AiFillEye size={22} />}
+          </button>
+        </div>
+
+        {errors.password && (
+          <p className="text-red-500 mt-1">{errors.password.message}</p>
+        )}
       </div>
-        <div className="mb-5">
+
+
+      <div className="mb-5">
+        <div className="relative">
+          <input
+            type={showRePassword ? "password" :"text"}
+            {...register("rePassword")}
+            placeholder="Re Password"
+            className="font-bold text-lg w-full h-11 px-2 pr-10 border-2 border-gray-500"
+          />
+
+          <button
+            type="button"
+            onClick={() => setShowRePassword(!showRePassword)}
+            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600"
+          >
+            {showRePassword ? <AiFillEyeInvisible size={22} /> : <AiFillEye size={22} />}
+          </button>
+        </div>
+
+        {errors.rePassword && (
+          <p className="text-red-500 mt-1">{errors.rePassword.message}</p>
+        )}
+      </div>
+
+
+      <div className="mb-5">
         <input type="text" {...register("dateOfBirth")} placeholder="dateofBirth" className="font-bold text-lg  w-full h-11 px-2 border-2 border-gray-500" />
         {errors.dateOfBirth && <p className="text-red-500">{errors.dateOfBirth?.message}</p>}
       </div>
@@ -127,8 +168,8 @@ export default function MyForm() {
       </div>
 
     
-      <button type="submit" disabled={isLoading} className="w-full mt-4 text-xl bg-blue-600 h-12 rounded-4xl cursor-pointer font-bold text-white ">
-        {isLoading ? "Submitting..." : "Submit"}
+      <button type="submit" disabled={isPending} className="w-full mt-4 text-xl bg-blue-600 h-12 rounded-4xl cursor-pointer font-bold text-white ">
+        {isPending ? "Submitting..." : "Submit"}
       </button>
     </form>
 
