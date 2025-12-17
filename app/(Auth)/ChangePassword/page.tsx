@@ -98,6 +98,7 @@ export default function MyForm() {
               <input
                 type={showPassword ? "password" :"text"}
                 {...register("password")}
+                autoComplete="new-password"
                 placeholder="Password"
                 className="font-bold text-lg w-full h-11 px-2 pr-10 border-2 border-gray-500"
               />
