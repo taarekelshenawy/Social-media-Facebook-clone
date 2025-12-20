@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import useCreatepost from '@/hooks/useCreatepost';
+import { useQueryClient } from '@tanstack/react-query';
 
 
 
@@ -7,12 +8,13 @@ export const Createpost = ({setShowModal}:{setShowModal: React.Dispatch<React.Se
     const [body,setBody]=useState('');
     const [image,setImage]=useState<File | null>(null);
     const Post = useCreatepost();
-
+    const queryClient = useQueryClient();
     const showData = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     Post.mutate({body,image}, {
       onSuccess: () => {
         setShowModal(false);
+        queryClient.invalidateQueries({ queryKey: ["userposts"] });
       },
     })
 }
