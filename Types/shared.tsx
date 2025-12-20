@@ -18,12 +18,41 @@ export type LoginData ={
 
 export type PostsData ={
     posts:{
+        createdAt: string
         _id:string,
     body:string,
     image:string,
     user:{
        name:string,
        photo:string,
+       _id : string
+    }
+    comments:{
+        _id:string,
+        content:string,
+        commentCreator:{
+            name:string,
+            photo:string
+        }
+    }[]
+
+
+    }[]
+   
+         
+    
+   
+}
+export type PostsUserData ={
+    posts:{
+        _id:string,
+    body:string,
+    image:string,
+    createdAt:string,
+    user:{
+       name:string,
+       photo:string,
+       _id : string
     }
     comments:{
         _id:string,
