@@ -6,6 +6,7 @@ import {
   MdGroups,
   MdStorefront
 } from "react-icons/md";
+import Link from 'next/link';
 
 
 export const Navbar = () => {
@@ -43,9 +44,9 @@ export const Navbar = () => {
         </div>
         }
       
-        <div>
+        <Link href={"./Homepage/UserProfile"}>
             <Image src="/images/default-profile.png" className='rounded-4xl cursor-pointer' alt='logo' width={50} height={30}></Image>
-        </div>
+        </Link>
  
 
 
