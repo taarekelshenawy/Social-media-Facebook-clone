@@ -1,12 +1,14 @@
 
 import Homepage from "./(protected)/Homepage/page";
+import Gaurd from "../Components/Gaurd/Gaurd"
 
 
 export default function Home() {
   return (
     <>
-    <Homepage/>
+      <Gaurd>
+        <Homepage/>
+      </Gaurd>
     </>
-  
   );
 }

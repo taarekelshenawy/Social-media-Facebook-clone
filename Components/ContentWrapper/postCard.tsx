@@ -15,7 +15,7 @@ export default function Card() {
         data?.map((item)=>{
             
           return(
-              <div key={item._id} className=" mt-5 mx-auto bg-white rounded-xl shadow p-4 space-y-3">
+            <div key={item._id} className=" mt-5 mx-auto bg-white rounded-xl shadow p-4 space-y-3">
 
       {/* ===== Header ===== */}
       <div className="flex items-center gap-3">
@@ -29,7 +29,13 @@ export default function Card() {
 
         <div>
           <p className="font-semibold text-sm">{item.user.name}</p>
-          <p className="text-xs text-gray-500">2h · 🌍</p>
+          <p className="text-xs text-gray-500">
+            {new Date(item.createdAt).toLocaleTimeString("en-US", {
+              hour: "numeric",
+              minute: "2-digit",
+              hour12: true,
+            })}
+          </p>
         </div>
       </div>
 
