@@ -43,7 +43,7 @@ export default function MyForm() {
     
     mutate(data,{
       onSuccess:()=>{
-        router.push('/Homepage')
+        router.push('/Addphoto')
       }
      });
     reset(); // Reset form after successful submission
