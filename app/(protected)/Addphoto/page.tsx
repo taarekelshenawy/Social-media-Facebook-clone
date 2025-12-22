@@ -35,6 +35,7 @@ export default function Page() {
               height={200}
             />
           </div>
+          
            <div  className="sm:w-[70%] xl:basis-[40%] mx-auto flex flex-col  gap-10 ">
             <div className='flex flex-col items-center'>
                 <label htmlFor='profile-photo'>

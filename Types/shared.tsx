@@ -17,8 +17,8 @@ export type LoginData ={
 }
 
 export type PostsData ={
-    posts:{
-        createdAt: string
+   posts:{
+      createdAt: string
         _id:string,
     body:string,
     image:string,
@@ -37,7 +37,10 @@ export type PostsData ={
     }[]
 
 
-    }[]
+
+   }[]
+      
+
    
          
     
@@ -69,4 +72,15 @@ export type PostsUserData ={
          
     
    
+}
+
+export type userInfoData={
+    user:{
+         _id:string,
+    name:string,
+    photo:string | undefined,
+    email:string,
+    }
+   
+
 }
