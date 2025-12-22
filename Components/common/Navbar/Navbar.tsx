@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import useGetuserInfo from '@/hooks/useGetuserInfo';
 import { 
   MdHomeFilled,
   MdOndemandVideo,
@@ -11,6 +12,7 @@ import Link from 'next/link';
 
 export const Navbar = () => {
     const [isMobile,setIsMobile]=useState(false);
+    const userInfo =useGetuserInfo();
 
 
     useEffect(()=>{
@@ -36,17 +38,26 @@ export const Navbar = () => {
         {
             isMobile ? '' :
         <div className='flex gap-16 items-center'>
-         <MdHomeFilled className='text-4xl'/>
+         <Link href='/'><MdHomeFilled className='text-4xl'/></Link>
          <MdOndemandVideo  className='text-4xl'/>
          <MdGroups  className='text-4xl'/>
          <MdStorefront  className='text-4xl'/>
 
         </div>
         }
-      
-        <Link href={"./Homepage/UserProfile"}>
-            <Image src="/images/default-profile.png" className='rounded-4xl cursor-pointer' alt='logo' width={50} height={30}></Image>
+        <Link href="/UserProfile">
+        {userInfo.data?.photo && (
+            <Image
+                src={userInfo.data.photo}
+                className=' cursor-pointer h-[50] rounded-full'
+                alt='user'
+                width={50}
+                height={50}
+            />
+            )}
         </Link>
+
+           
  
 
 

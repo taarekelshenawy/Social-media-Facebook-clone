@@ -12,7 +12,6 @@ const useGetUserPost=async(token:string)=>{
               token:token
             }
         });
-        console.log(response.data.posts);
         return response.data.posts;
 
     }catch(error)

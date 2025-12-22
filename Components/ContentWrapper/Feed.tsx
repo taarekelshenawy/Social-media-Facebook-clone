@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useGetuserInfo from '@/hooks/useGetuserInfo';
 import { 
   MdVideocam, 
   MdPhotoLibrary, 
@@ -12,6 +13,7 @@ import Link from 'next/link';
 
 export default function Posts() {
   const [shoModal,setShoModal]=useState(false);
+  const userInfo =useGetuserInfo();
  
   
   return (
@@ -27,7 +29,14 @@ export default function Posts() {
         <div className='flex gap-2'>
               <div className='bg-gray-200 px-3 rounded-3xl w-72 max-sm:w-40 cursor-pointer flex items-center justify-end' onClick={()=>setShoModal(!shoModal)}>بم تفكر</div>
               <Link href={"./Homepage/UserProfile"}>
-                <Image src="/images/default-profile.png" className='rounded-4xl cursor-pointer' alt='logo' width={40} height={30}></Image>
+              {
+                userInfo.data?.photo &&
+                    <Image src={userInfo.data.photo}   className=' cursor-pointer h-[50] rounded-full'
+                alt='logo'
+                width={50}
+                height={50}></Image>
+              }
+
               </Link>
         </div>
     </div>
