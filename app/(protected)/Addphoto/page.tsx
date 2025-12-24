@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import useAddprofilephoto from '@/hooks/useAddprofilephoto';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 export default function Page() {
     const [photo,setPhoto]=useState<File | null>(null);
@@ -11,7 +12,7 @@ export default function Page() {
     const route = useRouter();
 
     function Addprofile(){
-         if (!photo) return;
+      if (!photo) return toast.error('you must upload photo');
     addphoto.mutate({ photo },{
         onSuccess:()=>{
             route.push('/')
@@ -39,7 +40,8 @@ export default function Page() {
            <div  className="sm:w-[70%] xl:basis-[40%] mx-auto flex flex-col  gap-10 ">
             <div className='flex flex-col items-center'>
                 <label htmlFor='profile-photo'>
-                   {photo ? <Image src={URL.createObjectURL(photo)}  alt='user-img' className='cursor-pointer rounded-full h-[150]' width={150} height={120}></Image> :<Image src="/images/user.png" alt='user-img' className='cursor-pointer' width={120} height={50}></Image>}
+                   {photo ? <Image src={URL.createObjectURL(photo)}  alt='user-img' className='cursor-pointer rounded-full h-[150]' width={150} height={120}></Image> :
+                   <Image src="/images/user.png" alt='user-img' className='cursor-pointer' width={120} height={50}></Image>}
                 </label>
                 <input type='file' id="profile-photo" 
                 onChange={(e) => {
@@ -47,7 +49,7 @@ export default function Page() {
                             setPhoto(e.target.files[0]);
                             }
                         }}
-                className='hidden'>
+                className='hidden' >
                 </input>
             </div>
             <p className='text-xl font-bold text-[#65676B]'>You can upload a profile picture to customize your profile.</p>

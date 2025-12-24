@@ -18,7 +18,7 @@ export default function Posts() {
   
   return (
     <div className='w-[600] max-sm:w-[350] mx-auto'>
-      <div className='bg-white flex justify-between gap-7 p-2 rounded-2xl w-full'>
+      <div className='bg-white flex justify-between gap-7 p-2 rounded-2xl w-full '>
         <div className='flex items-center gap-3'>
             <MdEmojiEmotions className='text-3xl max-sm:text-2xl text-amber-200'/>
             <div className="cursor-pointer" onClick={()=>setShoModal(!shoModal)}>
@@ -29,17 +29,21 @@ export default function Posts() {
         <div className='flex gap-2'>
               <div className='bg-gray-200 px-3 rounded-3xl w-72 max-sm:w-40 cursor-pointer flex items-center justify-end' onClick={()=>setShoModal(!shoModal)}>بم تفكر</div>
               <Link href={"./Homepage/UserProfile"}>
-              {
-                userInfo.data?.photo &&
-                    <Image src={userInfo.data.photo}   className=' cursor-pointer h-[50] rounded-full'
-                alt='logo'
-                width={50}
-                height={50}></Image>
-              }
+               {userInfo.data?.photo ?(
+                          <Image
+                              src={userInfo.data.photo}
+                              className=' cursor-pointer h-[50] rounded-full'
+                              alt='user'
+                              width={50}
+                              height={50}
+                          />
+                          ):
+                            <Image src="/images/user.png" alt='user-img' className='cursor-pointer h-[50] rounded-full' width={50} height={50}></Image>
+                      }
 
               </Link>
         </div>
-    </div>
+     </div>
 
     <div className='w-full'>
         <PostCard/>
