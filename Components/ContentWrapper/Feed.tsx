@@ -28,7 +28,7 @@ export default function Posts() {
         </div>
         <div className='flex gap-2'>
               <div className='bg-gray-200 px-3 rounded-3xl w-72 max-sm:w-40 cursor-pointer flex items-center justify-end' onClick={()=>setShoModal(!shoModal)}>بم تفكر</div>
-              <Link href={"./Homepage/UserProfile"}>
+              <Link href={"./UserProfile"}>
                {userInfo.data?.photo ?(
                           <Image
                               src={userInfo.data.photo}
