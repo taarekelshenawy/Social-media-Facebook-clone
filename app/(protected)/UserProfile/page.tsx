@@ -8,6 +8,7 @@ import useGetuserInfo from "@/hooks/useGetuserInfo";
 import { Navbar } from "@/Components/common/Navbar/Navbar";
 import React, { useState, useEffect } from "react";
 import useUpdatepost from "@/hooks/useUpdatepost";
+import DeletePost from "@/Components/Modals/deletePost";
 
 interface DropdownMenuProps {
   onUpdate?: (body: string, image: File | null) => void;
@@ -20,14 +21,17 @@ export default function Page(props: DropdownMenuProps = {}) {
   const { data, isLoading } = useGetUserposts();
   const userInfo = useGetuserInfo();
   const update=useUpdatepost();
+  
 
   const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [deleteModal,setDeleteModal]=useState(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [selectedPost, setSelectedPost] = useState<any>(null);
   const [body, setBody] = useState<string>("");
   const [image,setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>("");
+  const [postId,setPostId]=useState('');
 
 
   useEffect(() => {
@@ -51,8 +55,10 @@ export default function Page(props: DropdownMenuProps = {}) {
     setOpenDropdownId(null);
   };
 
-  const handleDelete = () => {
+  const handleDelete = (PostId:string) => {
     setOpenDropdownId(null);
+    setDeleteModal(true);
+    setPostId(PostId);
   };
 
 
@@ -160,7 +166,7 @@ export default function Page(props: DropdownMenuProps = {}) {
                         <div className="h-px bg-gray-100"></div>
 
                         <button
-                          onClick={handleDelete}
+                          onClick={()=>handleDelete(post._id)}
                           className="w-full px-4 py-3 text-left text-sm font-medium text-red-600 hover:bg-red-50 flex items-center gap-2 transition-colors duration-200 group"
                         >
                           <svg
@@ -407,6 +413,12 @@ export default function Page(props: DropdownMenuProps = {}) {
             animation: scaleIn 0.3s ease-out;
           }
         `}</style>
+
+        {deleteModal && 
+        <>
+        <DeletePost setDeletModal={setDeleteModal} selectedPost={postId}/>
+        </>
+        }
       </div>
     </div>
   );
