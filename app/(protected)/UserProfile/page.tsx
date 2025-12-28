@@ -6,7 +6,8 @@ import Loading from "../../../Components/feedback/loading";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import useGetuserInfo from "@/hooks/useGetuserInfo";
 import { Navbar } from "@/Components/common/Navbar/Navbar";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import useUpdatepost from "@/hooks/useUpdatepost";
 
 interface DropdownMenuProps {
   onUpdate?: (body: string, image: File | null) => void;
@@ -18,15 +19,16 @@ interface DropdownMenuProps {
 export default function Page(props: DropdownMenuProps = {}) {
   const { data, isLoading } = useGetUserposts();
   const userInfo = useGetuserInfo();
+  const update=useUpdatepost();
 
   const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [selectedPost, setSelectedPost] = useState<any>(null);
   const [body, setBody] = useState<string>("");
-  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [image,setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>("");
-  const fileInputRef = useRef<HTMLInputElement>(null);
+
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -53,26 +55,12 @@ export default function Page(props: DropdownMenuProps = {}) {
     setOpenDropdownId(null);
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setImageFile(file);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
 
   const handleSubmit = () => {
-    console.log("Update post:", selectedPost._id);
-    console.log("Body:", body);
-    console.log("Image:", imageFile);
-
+    update.mutate({selectedPost,body,image})
     setShowModal(false);
     setBody("");
-    setImageFile(null);
+    setImage(null);
     setImagePreview("");
     setSelectedPost(null);
   };
@@ -81,7 +69,7 @@ export default function Page(props: DropdownMenuProps = {}) {
     setShowModal(false);
     setBody("");
     setImagePreview("");
-    setImageFile(null);
+    setImage(null);
     setSelectedPost(null);
   };
 
@@ -285,13 +273,7 @@ export default function Page(props: DropdownMenuProps = {}) {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Image
                   </label>
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageChange}
-                    className="hidden"
-                  />
+                
 
                   {imagePreview ? (
                     <div className="relative">
@@ -305,9 +287,8 @@ export default function Page(props: DropdownMenuProps = {}) {
                       <button
                         onClick={() => {
                           setImagePreview("");
-                          setImageFile(null);
-                          if (fileInputRef.current)
-                            fileInputRef.current.value = "";
+                          setImage(null);
+                      
                         }}
                         className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-2 hover:bg-red-600 transition-colors duration-200 shadow-lg"
                       >
@@ -327,11 +308,9 @@ export default function Page(props: DropdownMenuProps = {}) {
                       </button>
                     </div>
                   ) : (
-                    <button
-                      onClick={() => fileInputRef.current?.click()}
-                      className="w-full h-32 border-2 border-dashed border-gray-300 rounded-lg hover:border-green-500 hover:bg-green-50 transition-all duration-200 flex flex-col items-center justify-center gap-2 text-gray-500 hover:text-green-600"
-                    >
-                      <svg
+                    <>
+                     <label htmlFor="uploadImg" className="w-full h-32 border-2 border-dashed border-gray-300 rounded-lg hover:border-green-500 hover:bg-green-50 transition-all duration-200 flex flex-col items-center justify-center gap-2 text-gray-500 hover:text-green-600">
+                       <svg
                         className="w-10 h-10"
                         fill="none"
                         stroke="currentColor"
@@ -344,10 +323,22 @@ export default function Page(props: DropdownMenuProps = {}) {
                           d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                         />
                       </svg>
-                      <span className="text-sm font-medium">
-                        Click to upload image
-                      </span>
-                    </button>
+                     </label>
+                     <input
+                     id="uploadImg"
+                    type="file"
+                    accept="image/*"
+                    onChange={(e)=>{
+                      if(e.target.files && e.target.files[0]){
+                        setImage(e.target.files[0])
+                      }
+                    }
+                      
+                    
+                    }
+                    className="hidden"
+                  />
+                    </>
                   )}
                 </div>
               </div>

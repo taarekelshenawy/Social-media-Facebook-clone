@@ -84,3 +84,11 @@ export type userInfoData={
    
 
 }
+
+export type PostData = {
+    selectedPost:{
+        _id:string
+    }
+  body: string;
+  image?: File | null;
+};
