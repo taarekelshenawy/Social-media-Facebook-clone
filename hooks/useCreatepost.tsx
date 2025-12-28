@@ -3,15 +3,13 @@ import axios, { isAxiosError } from "axios";
 import { toast } from "react-toastify";
 import { useContext } from "react";
 import { AuthContext } from "@/context/context";
+import { PostData } from "@/Types/shared";
 
 
 
 
 
-type PostData = {
-  body: string;
-  image?: File | null;
-};
+
 
 const CreatePost=async (data:PostData,token:string)=>{
 const formdata = new FormData();
