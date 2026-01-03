@@ -35,16 +35,30 @@ export type PostsData ={
             photo:string
         }
     }[]
-
-
-
-   }[]
-      
-
+   }[] 
    
-         
-    
-   
+}
+export type PostDatabyId ={
+   post:{
+      createdAt: string;
+        _id:string,
+    body:string,
+    image:string,
+    user:{
+       name:string,
+       photo:string,
+       _id : string
+    }
+    comments:{
+        _id:string,
+        content:string,
+        commentCreator:{
+            _id:string,
+            name:string,
+            photo:string
+        }
+    }[]
+   }
 }
 export type PostsUserData ={
     posts:{
@@ -86,7 +100,6 @@ export type userInfoData={
 }
 
 export type PostData = {
-
   body: string;
   image?: File | null;
 };
@@ -97,4 +110,19 @@ export type UpdatePostProps={
   body: string;
   image?: File | null;
 
+}
+
+export type CommentProps={
+         comments:{  _id:string,
+            content: string,
+            commentCreator: {
+                _id:string,
+                name:string,
+                photo:string
+            },
+            post:string,
+            createdAt:string,
+            id:string
+        }[]
+        
 }

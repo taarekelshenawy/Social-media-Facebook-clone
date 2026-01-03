@@ -12,6 +12,7 @@ import Link from 'next/link';
 
 
 export default function Posts() {
+  
   const [shoModal,setShoModal]=useState(false);
   const userInfo =useGetuserInfo();
  

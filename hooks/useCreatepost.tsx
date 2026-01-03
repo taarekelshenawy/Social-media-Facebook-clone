@@ -47,8 +47,8 @@ export default function useCreatepost() {
 
  return useMutation({
   mutationFn: (data:PostData)=>CreatePost(data,token),
-  onSuccess: async (data) => {
-    toast.success(`${data.message}`)
+  onSuccess: async () => {
+    toast.success(` posted added successfully`)
   },
   onError: (error: unknown) => {
   if (typeof error === "string") {

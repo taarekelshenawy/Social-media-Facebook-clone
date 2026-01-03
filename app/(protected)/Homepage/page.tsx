@@ -8,9 +8,6 @@ import SideBar from "@/Components/ContentWrapper/sideBar";
 export default function Homepage() {
   
 
-
-
-  
   return (
     <div>
     <Navbar/>

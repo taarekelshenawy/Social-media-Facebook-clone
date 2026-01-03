@@ -19,6 +19,7 @@ export default function Page() {
         }
     });
     }
+    
   return (
  <div className="flex flex-col justify-center items-center h-screen">
       <div className="flex gap-20 w-[90%] items-center  ">
