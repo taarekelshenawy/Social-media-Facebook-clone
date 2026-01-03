@@ -6,15 +6,15 @@ type deleteProps={
     selectedPost:string,
 }
 export default function DeletePost({setDeletModal,selectedPost}:deleteProps) {
-      const deletePost = useDeletePost();
+    const deletePost = useDeletePost();
 
     const handleDelete = () => {
-    deletePost.mutate(selectedPost,{
-        onSuccess:()=>{
-            setDeletModal(false)
-        }
-    })
-  };
+      deletePost.mutate(selectedPost,{
+          onSuccess:()=>{
+              setDeletModal(false)
+          }
+      })
+    };
   return (
     <div className=' h-screen  fixed inset-0 flex flex-col bg-black/30 justify-center items-center ' onClick={()=>setDeletModal(false)}  >
         <div className=' w-[500] bg-white  p-7  gap-9 rounded-2xl ' onClick={(e)=>e.stopPropagation()}>

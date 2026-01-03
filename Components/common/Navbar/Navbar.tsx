@@ -29,6 +29,7 @@ export const Navbar = () => {
     return ()=>window.removeEventListener('resize',ResSize);
 
     },[])
+    
     if(!context)return;
     const {LogOut}=context;
 

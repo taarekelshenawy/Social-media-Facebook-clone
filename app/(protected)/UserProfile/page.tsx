@@ -9,6 +9,7 @@ import { Navbar } from "@/Components/common/Navbar/Navbar";
 import React, { useState, useEffect } from "react";
 import useUpdatepost from "@/hooks/useUpdatepost";
 import DeletePost from "@/Components/Modals/deletePost";
+import CommentsPage from "@/Components/Modals/commentModal";
 
 interface DropdownMenuProps {
   onUpdate?: (body: string, image: File | null) => void;
@@ -19,6 +20,8 @@ interface DropdownMenuProps {
 
 export default function Page(props: DropdownMenuProps = {}) {
   const { data, isLoading } = useGetUserposts();
+  const [commentModal,setCommentModal]=useState(false);
+  const [commentId,setCommentId]=useState('');
   const userInfo = useGetuserInfo();
   const update=useUpdatepost();
   
@@ -82,7 +85,7 @@ export default function Page(props: DropdownMenuProps = {}) {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="min-h-screen bg-gray-100 py-4">
+    <div className="min-h-screen bg-gray-100 py-4 z-30">
       <Navbar />
       <div className="mt-28 ">
         <div className=" bg-white max-w-140 mx-auto flex flex-col gap-6 p-6 mb-6">
@@ -233,7 +236,7 @@ export default function Page(props: DropdownMenuProps = {}) {
                     <span className="text-xl group-hover:scale-125 transition-transform duration-200">
                       💬
                     </span>
-                    <span className="text-gray-600 font-medium text-sm">
+                    <span className="text-gray-600 font-medium text-sm" onClick={()=>{return (setCommentId(post._id),setCommentModal(true))}}>
                       Comment
                     </span>
                   </button>
@@ -413,12 +416,13 @@ export default function Page(props: DropdownMenuProps = {}) {
             animation: scaleIn 0.3s ease-out;
           }
         `}</style>
-
+       
         {deleteModal && 
         <>
         <DeletePost setDeletModal={setDeleteModal} selectedPost={postId}/>
         </>
         }
+         {commentModal && <CommentsPage setModalComment={setCommentModal} id ={commentId}/>}
       </div>
     </div>
   );
