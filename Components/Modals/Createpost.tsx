@@ -27,7 +27,7 @@ export const Createpost = ({setShowModal}:{setShowModal: React.Dispatch<React.Se
       }
 
   return (
-    <div className=' bg-black/50 fixed inset-0 flex flex-col justify-center items-center' onClick={()=>setShowModal(false)}>
+    <div className=' bg-black/50 fixed inset-0 flex flex-col justify-center items-center z-50' onClick={()=>setShowModal(false)}>
         <div className='w-[500] bg-white p-4 flex flex-col gap-6 rounded ' onClick={(e) => e.stopPropagation()}>
             <h1 className='text-center font-bold text-2xl '>Add post</h1>
             <form className='flex flex-col' onSubmit={showData}>
