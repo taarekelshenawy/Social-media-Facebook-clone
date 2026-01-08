@@ -3,6 +3,9 @@ import { useQuery } from "@tanstack/react-query"
 import axios, { isAxiosError } from "axios"
 import { useContext } from "react";
 import { PostDatabyId } from "@/Types/shared";
+import { useQueryClient } from "@tanstack/react-query";
+import type { PostsData } from "@/Types/shared";
+
 
 const GetSinglepost =async(id:string,token:string)=>{
   
@@ -35,9 +38,22 @@ export default function useGetsingelPost(id:string) {
         throw new Error('there is no context')
     }
     const {token} = context;
+    const queryClient = useQueryClient();
+
+const getCahcedData = queryClient.getQueryData<PostsData>(["posts"]);
+
  const query = useQuery({
     queryKey:["singlePost",id],
-    queryFn:()=>GetSinglepost(id,token)
+    queryFn:()=>GetSinglepost(id,token),
+    initialData:()=>{
+        if(!getCahcedData?.posts){
+            return undefined;
+        }else{
+            const result = getCahcedData.posts.find((el)=>el._id === id);
+            return result;
+        }
+        
+    }
  })
  return query;
 }

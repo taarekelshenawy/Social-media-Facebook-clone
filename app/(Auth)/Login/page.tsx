@@ -7,7 +7,7 @@ export default function page() {
       <div className="flex gap-20 w-[90%] items-center  ">
            <div className="flex items-center   basis-[60%]  sm:hidden max-sm:hidden xl:flex">
             <div className="flex flex-col xl:gap-16">
-               <Image src="/images/facebook.png"  alt="logo" width={70} height={50}></Image>
+               <Image src="/images/facebook.png"  alt="logo" width={70} height={50} className='w-auto h-auto'></Image>
                <h1 className="text-5xl font-bold leading-14">Explore the things
                 <span className="text-blue-700"> you love.</span>
                 </h1>

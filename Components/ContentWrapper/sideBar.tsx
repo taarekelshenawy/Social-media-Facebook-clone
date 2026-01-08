@@ -17,7 +17,7 @@ import useGetuserInfo from "@/hooks/useGetuserInfo";
 export default function Sidebar() {
   const {data}=useGetuserInfo();
   return (
-    <aside className="w-64 h-screen sticky top-24 hidden md:block ">
+    <aside className="w-64 h-screen sticky top-24 hidden  xl:block">
       <div className="p-4 space-y-4">
 
         {/* User */}

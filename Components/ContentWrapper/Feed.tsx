@@ -39,7 +39,7 @@ export default function Posts() {
                               height={50}
                           />
                           ):
-                            <Image src="/images/user.png" alt='user-img' className='cursor-pointer h-[50] rounded-full' width={50} height={50}></Image>
+                            <Image src="/images/user.png" loading='eager' alt='user-img' className='cursor-pointer w-[50] h-[50] rounded-full' width={50} height={50}></Image>
                       }
 
               </Link>

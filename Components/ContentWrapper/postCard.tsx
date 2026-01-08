@@ -28,7 +28,7 @@ export default function Card() {
           alt="user"
           width={40}
           height={40}
-          className="rounded-full object-cover"
+          className="rounded-full object-cover h-auto w-auto"
         />
         <div>
           <p className="font-semibold text-sm">{item.user.name}</p>
@@ -53,7 +53,7 @@ export default function Card() {
           src={item.image ? item.image : 'https://images.unsplash.com/photo-1611162616475-46b635cb6868'} // أو URL من API
           alt="post"
           fill
-          className="object-cover"
+          className="object-cover w-auto h-auto"
         />
       </div>
 
@@ -74,7 +74,7 @@ export default function Card() {
      
             {
           item.comments.slice(0,2)?.map((item)=>{
-            console.log(item.commentCreator.photo)
+            
             return(
                <div key={item._id} className="flex gap-2">
           <Image

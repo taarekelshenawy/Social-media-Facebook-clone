@@ -82,11 +82,13 @@ export default function Page(props: DropdownMenuProps = {}) {
     setSelectedPost(null);
   };
 
-  if (isLoading) return <Loading />;
+
 
   return (
     <div className="min-h-screen bg-gray-100 py-4 z-30">
       <Navbar />
+           {isLoading ? <Loading/>
+           :
       <div className="mt-28 ">
         <div className=" bg-white max-w-140 mx-auto flex flex-col gap-6 p-6 mb-6">
           <p className="text-xl font-bold">
@@ -100,7 +102,6 @@ export default function Page(props: DropdownMenuProps = {}) {
             </span>
           </p>
         </div>
-
         {data?.map((post) => {
           return (
             <div
@@ -424,6 +425,8 @@ export default function Page(props: DropdownMenuProps = {}) {
         }
          {commentModal && <CommentsPage setModalComment={setCommentModal} id ={commentId}/>}
       </div>
+
+}
     </div>
   );
 }

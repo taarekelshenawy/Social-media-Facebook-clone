@@ -42,7 +42,7 @@ export default function Page() {
             <div className='flex flex-col items-center'>
                 <label htmlFor='profile-photo'>
                    {photo ? <Image src={URL.createObjectURL(photo)}  alt='user-img' className='cursor-pointer rounded-full h-[150]' width={150} height={120}></Image> :
-                   <Image src="/images/user.png" alt='user-img' className='cursor-pointer' width={120} height={50}></Image>}
+                   <Image src="/images/user.png" alt='user-img' loading="eager" className='cursor-pointer' width={120} height={50}></Image>}
                 </label>
                 <input type='file' id="profile-photo" 
                 onChange={(e) => {

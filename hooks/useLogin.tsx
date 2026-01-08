@@ -9,7 +9,7 @@ import { AuthContext } from "@/context/context";
 const LoginFunc =async (data:LoginData)=>{
     try{
         const response = await axios.post("https://linked-posts.routemisr.com/users/signin",data);
-        localStorage.setItem("token" , response.data.token)
+        localStorage.setItem("token" ,response.data.token)
         return response.data.token;
     }catch(error){
        if (isAxiosError(error)) {

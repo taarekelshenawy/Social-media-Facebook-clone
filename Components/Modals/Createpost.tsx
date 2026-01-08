@@ -32,7 +32,7 @@ export const Createpost = ({setShowModal}:{setShowModal: React.Dispatch<React.Se
             <h1 className='text-center font-bold text-2xl '>Add post</h1>
             <form className='flex flex-col' onSubmit={showData}>
             <label htmlFor="message" className='mb-2 text-gray-700 font-bold'>Your title:</label>
-            <textarea id="message" name="message" className='border p-2 mb-3' cols={30} onChange={(e)=>setBody(e.target.value)}>
+            <textarea id="message" name="message" className='border p-2 mb-3' cols={30} onChange={(e)=>setBody(e.target.value)} required>
             </textarea>
             {/* image preview */}
               {imagePreview ?
