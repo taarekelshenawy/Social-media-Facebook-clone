@@ -18,7 +18,7 @@ export const Navbar = () => {
 
     useEffect(()=>{
     const ResSize=()=>{
-            if(window.innerWidth < 800){
+            if(window.innerWidth < 900){
                 setIsMobile(true);
             }else{
                 setIsMobile(false)
@@ -36,7 +36,9 @@ export const Navbar = () => {
   return (
     <nav className='p-5 flex h-24 justify-between items-center bg-white fixed top-0 left-0 right-0 z-50 gap-2'>
         <div className='flex gap-2 items-center'>
-            <Image src="/images/facebook.png" alt='logo' width={50} height={30}></Image>
+           <Link href="/">
+            <Image src="/images/facebook.png" loading='eager' className='w-auto h-auto' alt='logo' width={50} height={30}></Image>
+           </Link>
             <input type='text' placeholder='search' className='bg-gray-300 px-4 h-10 rounded-3xl w-[80%]'></input>
         </div>
         {
@@ -54,13 +56,13 @@ export const Navbar = () => {
         {userInfo.data?.photo ?(
             <Image
                 src={userInfo.data.photo}
-                className=' cursor-pointer h-[50] rounded-full'
+                className=' cursor-pointer h-[50] w-[50] rounded-full'
                 alt='user'
                 width={50}
                 height={50}
             />
             ):
-              <Image src="/images/user.png" alt='user-img' className='cursor-pointer h-[50] rounded-full' width={50} height={50}></Image>
+              <Image src="/images/user.png" loading='eager' alt='user-img' className='cursor-pointer  rounded-full' width={50} height={50}></Image>
         }
         </Link>
         <button className='border h-8 w-20 text-sm font-semibold bg-red-500

@@ -8,7 +8,8 @@ type childrenProps={
     children:React.ReactNode;
 }
 export default function Layout({children}:childrenProps) {
-     const [Isclient,setIsClient]=useState(false);
+   const [Isclient,setIsClient]=useState(false);
+
     const context = useContext(AuthContext);
     const router = useRouter();
      if(!context){

@@ -14,20 +14,45 @@ export default function DeletePost({setDeletModal,selectedPost}:deleteProps) {
               setDeletModal(false)
           }
       })
-    };
+    }
   return (
-    <div className=' h-screen  fixed inset-0 flex flex-col bg-black/30 justify-center items-center ' onClick={()=>setDeletModal(false)}  >
-        <div className=' w-[500] bg-white  p-7  gap-9 rounded-2xl ' onClick={(e)=>e.stopPropagation()}>
-         <h1 className='font-medium text-2xl mb-5'> Are you sure delete post ? </h1>
-         <div className='flex justify-end'>
-               <button className=' bg-red-500 w-20 text-white p-1 rounded-2xl font-medium cursor-pointer' onClick={()=>handleDelete()}>
-                    Delete
-                </button>
+    <div 
+  className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
+  onClick={() => setDeletModal(false)}
+>
+  <div 
+    className="bg-white rounded-3xl shadow-xl p-8 w-[90%] max-w-lg flex flex-col gap-6 relative"
+    onClick={(e) => e.stopPropagation()}
+  >
+    <h2 className="text-2xl font-semibold text-gray-800 text-center">
+      Are you sure you want to delete this post?
+    </h2>
+    <p className="text-gray-500 text-center">
+      This action cannot be undone. Please confirm if you want to proceed.
+    </p>
+    <div className="flex justify-end gap-4">
+      <button 
+        className="px-4 py-2 rounded-xl bg-gray-200 text-gray-700 font-medium hover:bg-gray-300 transition"
+        onClick={() => setDeletModal(false)}
+      >
+        Cancel
+      </button>
 
-         </div>
-      
-        </div>
-     
+      <button 
+        className="px-5 py-2 rounded-xl bg-red-500 text-white font-semibold hover:bg-red-600 transition"
+        onClick={() => handleDelete()}
+      >
+        Delete
+      </button>
     </div>
+    <button 
+      className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition"
+      onClick={() => setDeletModal(false)}
+    >
+      &#10005;
+    </button>
+  </div>
+</div>
+
   )
 }
