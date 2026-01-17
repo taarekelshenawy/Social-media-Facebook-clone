@@ -25,7 +25,7 @@ const createComment =async(token:string,info:commentData)=>{
     catch(error){
         if(isAxiosError(error)){
             if(error.response){
-                throw new Error(error.response.data || 'unexpected Error')
+                throw new Error(error.response.data.error || 'unexpected Error')
             }else{
                 throw new Error(error.message)
             }

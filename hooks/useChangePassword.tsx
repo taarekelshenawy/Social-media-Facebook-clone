@@ -14,7 +14,7 @@ const ChangePasswordFunc =async (data:ChangePasswordData)=>{
         return response.data.data;
     }catch(error){
        if (isAxiosError(error)) {
-      throw error.response?.data?.message || "Change Password failed"; // ✅ Error
+      throw error.response?.data?.error || "Change Password failed"; // ✅ Error
     }
     throw "Unexpected error";
     }
