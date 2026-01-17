@@ -7,7 +7,7 @@ import type { PostsData } from '@/Types/shared';
 
 const Getposts=async(token:string)=>{
     try{
-        const response = await axios.get<PostsData>("https://linked-posts.routemisr.com/posts?limit=50",{
+        const response = await axios.get<PostsData>("https://linked-posts.routemisr.com/posts?sort=-createdAt",{
             headers:{
               token:token
             }

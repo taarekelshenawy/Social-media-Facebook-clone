@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useContext } from "react";
 import { AuthContext } from "@/context/context";
 import { PostData } from "@/Types/shared";
+import { useQueryClient } from "@tanstack/react-query";
 
 
 
@@ -44,11 +45,13 @@ export default function useCreatepost() {
         throw new Error('there is no context')
     }
      const {token}=context;
+     const queryClient = useQueryClient();
 
  return useMutation({
   mutationFn: (data:PostData)=>CreatePost(data,token),
   onSuccess: async () => {
     toast.success(` posted added successfully`)
+    queryClient.invalidateQueries({queryKey:["posts"]})
   },
   onError: (error: unknown) => {
   if (typeof error === "string") {
